@@ -20,4 +20,4 @@ Total Params to be less than 1M.
 ========================================================================================================================
 Results:-
 
-Achieved an accuracy of 85.64% in 50 epochs.
+Achieved an accuracy of 85.2% in 50 epochs.
