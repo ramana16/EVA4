@@ -1,28 +1,43 @@
+import torch
+import torchvision
+import torchvision.transforms as transforms
 
-# CUDA?
-cuda = torch.cuda.is_available()
-print("CUDA Available?", cuda)
+from config import ModelConfig as args
+from utils import has_cuda
 
-# For reproducibility
-torch.manual_seed(SEED)
+class DataEngine(object):
 
-if cuda:
-    torch.cuda.manual_seed(SEED)
+	classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog',
+			'frog', 'horse', 'ship', 'truck')
 
-# dataloader arguments - something you'll fetch these from cmdprmt
-dataloader_args = dict(shuffle=True, batch_size=128, num_workers=4, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
+	def __init__(self, args):
+		super(DataEngine, self).__init__()
+		self.batch_size_cuda = args.batch_size_cuda
+		self.batch_size_cpu = args.batch_size_cpu
+		self.num_workers = args.num_workers
+		self.load()
 
-# train dataloader
-train_loader = torch.utils.data.DataLoader(train, **dataloader_args)
+	def load(self):
+		# Data Transformations
+		transform = transforms.Compose(
+		    [transforms.RandomHorizontalFlip(),
+		     transforms.ToTensor(),
+		     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-# test dataloader
-test_loader = torch.utils.data.DataLoader(test, **dataloader_args)
+		# Dataset and Creating Train/Test Split
+		train_set = torchvision.datasets.CIFAR10(root='./data', train=True,
+		                                        download=True, transform=transform)
+		test_set = torchvision.datasets.CIFAR10(root='./data', train=False,
+		                                       download=True, transform=transform)
 
-# dataloader arguments - something you'll fetch these from cmdprmt
-dataloader_args2 = dict(shuffle=True, batch_size=64, num_workers=4, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
+		# Dataloader Arguments & Test/Train Dataloaders
+		dataloader_args = dict(
+			shuffle= True,
+			batch_size= self.batch_size_cuda,
+			num_workers= self.num_workers,
+			pin_memory= True) if has_cuda() else dict(
+			shuffle= True,
+			batch_size= self.batch_size_cpu)
 
-# train dataloader
-train_loader2 = torch.utils.data.DataLoader(train, **dataloader_args2)
-
-# test dataloader
-test_loader2 = torch.utils.data.DataLoader(test, **dataloader_args2)
+		self.train_loader = torch.utils.data.DataLoader(train_set, **dataloader_args)
+		self.test_loader = torch.utils.data.DataLoader(test_set, **dataloader_args)

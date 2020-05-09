@@ -1,3 +1,4 @@
+from imports import *
 # Train Phase transformations
 train_transforms = transforms.Compose([
                                       #  transforms.Resize((28, 28)),

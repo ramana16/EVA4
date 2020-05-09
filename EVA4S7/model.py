@@ -1,3 +1,5 @@
+from imports import *
+
 dropout_value = 0.05
 class Net(nn.Module):
     def __init__(self):
