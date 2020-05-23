@@ -3,7 +3,7 @@ import torchvision
 import torchvision.transforms as transforms
 
 from config import ModelConfig as args
-from utils import has_cuda
+from utilities import has_cuda
 
 class DataEngine(object):
 
