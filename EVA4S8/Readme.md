@@ -1,13 +1,9 @@
 Objective - 
 
-Code should use GPU
-Architecture to be C1C2C3C40 (basically 3 MPs)
-Total RF must be more than 44
-One of the layers must use Depthwise Separable Convolution
-One of the layers must use Dilated Convolution
-use GAP (compulsory)
-achieve 80% accuracy
-Total Params to be less than 1M. 
+Go through this repository: https://github.com/kuangliu/pytorch-cifar (Links to an external site.)
+Extract the ResNet18 model from this repository and add it to your API/repo. 
+Use your data loader, model loading, train, and test code to train ResNet18 on Cifar10
+Your Target is 85% accuracy. No limit on the number of epochs. Use default ResNet18 code (so params are fixed). 
 
 Results
-Achieved an accuracy of 85.64% in 50 epochs.
+Achieved an accuracy of 85.85% in 50 epochs.
