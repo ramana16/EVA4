@@ -1,7 +1,8 @@
 import torch
 from tqdm import tqdm
 
-def train(model, device, train_loader, criterion, optimizer, epoch, l1_decay, l2_decay):
+def train(model, device, train_loader, criterion, optimizer, epoch,
+          l1_decay, l2_decay, scheduler=None):
   model.train()
   pbar = tqdm(train_loader)
   correct = 0
@@ -34,6 +35,8 @@ def train(model, device, train_loader, criterion, optimizer, epoch, l1_decay, l2
     # Backpropagation
     loss.backward()
     optimizer.step()
+    if scheduler:
+      scheduler.step()
 
     # Update pbar-tqdm
     pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
