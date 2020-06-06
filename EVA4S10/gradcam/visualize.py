@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from .gradcam import GradCam
-from utils import denormalize
+from utilities import denormalize
 
 class VisualizeCam(object):
 

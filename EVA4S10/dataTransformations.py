@@ -1,10 +1,8 @@
 from albumentations import (
 	Compose,
     HorizontalFlip,
-    Normalize,
-    CoarseDropout,
-    Rotate,
-    GaussianBlur,
+    Normalize,    
+    Rotate,    
     HueSaturationValue
 )
 from albumentations.pytorch import ToTensor
@@ -20,9 +18,7 @@ def albumentations_transforms(p=1.0, is_train=False):
 		transforms_list.extend([
 			HueSaturationValue(p=0.25),
 			HorizontalFlip(p=0.5),
-			Rotate(limit=15),
-			CoarseDropout(max_holes=1, max_height=16, max_width=16, min_height=4,
-						min_width=4, fill_value=mean*255.0, p=0.75),
+			Rotate(limit=15),			
 
 		])
 	transforms_list.extend([
