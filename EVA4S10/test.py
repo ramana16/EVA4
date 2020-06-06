@@ -40,7 +40,7 @@ def test(model, device, test_loader, criterion, classes, test_losses, test_accs,
     test_acc = 100. * correct / len(test_loader.dataset)
     test_accs.append(test_acc)
 
-    if test_acc > 85.0:
+    if test_acc >= 90.0:
         classwise_acc(model, device, test_loader, classes)
 
     print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(

@@ -2,11 +2,12 @@ import torch
 from tqdm import tqdm
 
 def train(model, device, train_loader, criterion, optimizer, epoch,
-          l1_decay, l2_decay, scheduler=None):
+          l1_decay, l2_decay, train_losses, train_accs, scheduler=None):
   model.train()
   pbar = tqdm(train_loader)
   correct = 0
   processed = 0
+  avg_loss = 0
   for batch_idx, (data, target) in enumerate(pbar):
     # get samples
     data, target = data.to(device), target.to(device)
@@ -42,6 +43,7 @@ def train(model, device, train_loader, criterion, optimizer, epoch,
     pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
     correct += pred.eq(target.view_as(pred)).sum().item()
     processed += len(data)
+    avg_loss += loss.item()
 
     pbar_str = f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}'
     if l1_decay > 0:
@@ -50,3 +52,8 @@ def train(model, device, train_loader, criterion, optimizer, epoch,
       pbar_str = f'L2_loss={l2_loss.item()} %s' % (pbar_str)
 
     pbar.set_description(desc= pbar_str)
+
+  avg_loss /= len(train_loader)
+  avg_acc = 100*correct/processed
+  train_accs.append(avg_acc)
+  train_losses.append(avg_loss)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from .gradcam import GradCam
-from utilities import denormalize
+from utils import denormalize
 
 class VisualizeCam(object):
 
@@ -28,11 +28,11 @@ class VisualizeCam(object):
 	    result = result.div(result.max()).squeeze()
 	    return heatmap, result
 
-	def plot_heatmaps(self, img_data, target_class, img_name):
+	def plot_heatmaps_indvidual(self, img_data, truth_class, pred_class, img_name):
 		fig, axs = plt.subplots(nrows=2, ncols=5, figsize=(10, 4),
 			subplot_kw={'xticks': [], 'yticks': []})
-		fig.suptitle('GradCam at different conv layers for the class: %s' % 
-			target_class, fontsize=13, weight='medium', y=1.05)
+		fig.suptitle('GradCam at different conv layers for the class: %s\nActual: %s - Predicted: %s' % 
+			(pred_class, truth_class, pred_class), fontsize=13, weight='medium', y=1.05)
 
 		for ax, data in zip(axs.flat, img_data):
 			img = data["img"]
@@ -42,30 +42,74 @@ class VisualizeCam(object):
 
 		plt.savefig(img_name)
 
+	def plot_heatmaps(self, img_data, img_name):
+		fig, axs = plt.subplots(nrows=len(img_data), ncols=3, figsize=(6, 50),
+			subplot_kw={'xticks': [], 'yticks': []})
 
-	def __call__(self, images, target_layers, target_inds=None, metric=""):
+		for i in range(len(img_data)):
+			data = img_data[i]
+			for j in range(len(data)):
+				img = data[j]["img"]
+				npimg = img.cpu().numpy()
+				axs[i][j].axis('off')
+				axs[i][j].set_title(data[j]["label"])
+				axs[i][j].imshow(np.transpose(npimg, (1, 2, 0)))
+
+		fig.tight_layout()
+		fig.savefig(img_name)
+
+
+	def __call__(self, images, truth_inds, target_layers, target_inds=None,
+				metric="", per_image=True):
 		masks_map, pred = self.gcam(images, target_layers, target_inds)
-		for i in range(min(len(images),5)):
-			img = images[i]
-			results_data = [{
-				"img": denormalize(img),
-				"label": "Result:"
-			}]
-			heatmaps_data = [{
-				"img": denormalize(img),
-				"label": "Heatmap:"
-			}]
-			for layer in target_layers:
+		if per_image:
+			for i in range(len(images)):
+				img = images[i]
+				results_data = [{
+					"img": denormalize(img),
+					"label": "Result:"
+				}]
+				heatmaps_data = [{
+					"img": denormalize(img),
+					"label": "Heatmap:"
+				}]
+				for layer in target_layers:
+					mask = masks_map[layer][i]
+					heatmap, result = self.visualize_cam(mask, denormalize(img))
+					results_data.append({
+						"img": result,
+						"label": layer
+					})
+					heatmaps_data.append({
+						"img": heatmap,
+						"label": layer
+					})
+				pred_class = self.classes[pred[i][0]]
+				truth_class = self.classes[truth_inds[i]]
+				fname = "gradcam_%s_%s_t%s_p%s.png" % (metric, i, truth_class, pred_class)
+				self.plot_heatmaps_indvidual(results_data+heatmaps_data, truth_class,
+											pred_class, fname)
+		else:
+			img_data = []
+			for i in range(len(images)):
+				img = images[i]
+				pred_class = self.classes[pred[i][0]]
+				truth_class = self.classes[truth_inds[i]]
+				results_data = [{
+					"img": denormalize(img),
+					"label": "Actual: %s\nPredicted: %s" % (truth_class, pred_class)
+				}]
+				layer = "layer4"
 				mask = masks_map[layer][i]
-				heatmap, result = self.visualize_cam(mask, img)
+				heatmap, result = self.visualize_cam(mask, denormalize(img))
 				results_data.append({
 					"img": result,
-					"label": layer
+					"label": "GradCAM: %s" % (layer)
 				})
-				heatmaps_data.append({
+				results_data.append({
 					"img": heatmap,
-					"label": layer
+					"label": "Heatmap: %s" % (layer)
 				})
-			pred_class = self.classes[pred[i][0]]
-			fname = "gradcam_%s_%s_%s.png" % (metric, i, pred_class)
-			self.plot_heatmaps(results_data+heatmaps_data, pred_class, fname)
+				img_data.append(results_data)
+			fname = "gradcam_%s.png" % (metric)
+			self.plot_heatmaps(img_data, fname)
