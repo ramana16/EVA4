@@ -3,7 +3,11 @@ from albumentations import (
     HorizontalFlip,
     Normalize,    
     Rotate,    
-    HueSaturationValue
+    HueSaturationValue,
+	Cutout,
+	RandomCrop,
+	VerticalFlip,
+	Resize
 )
 from albumentations.pytorch import ToTensor
 import numpy as np	
