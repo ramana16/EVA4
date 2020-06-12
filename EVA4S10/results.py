@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from utils import denormalize
+from utilities import denormalize
 
 def plot_images(img_data, classes, img_name):
   figure = plt.figure(figsize=(10, 10))
