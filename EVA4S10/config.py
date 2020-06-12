@@ -14,7 +14,7 @@ class ModelConfig(object):
 		self.l2_decay = 1e-3
 		self.lr = 0.001
 		self.momentum = 0.9
-		self.epochs = 5
+		self.epochs = 50
 
 	def print_config(self):
 		print("Model Parameters:")
