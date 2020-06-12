@@ -1,36 +1,39 @@
-Assignment Objective - 
+Assignment: 
+
+Pick your last code
 
 
-Move your last code's transformations to Albumentations. Apply ToTensor, HorizontalFlip, Normalize (at min) + More (for additional points)
-Please make sure that your test_transforms are simple and only using ToTensor and Normalize
-Implement GradCam function as a module. 
-Your final code (notebook file) must use imported functions to implement transformations and GradCam functionality
-Target Accuracy is 87%
-Submit answers to S9-Assignment-Solution. 
+Make sure  to Add CutOut to your code. It should come from your transformations (albumentations)
 
-Quiz Objective - 
 
-Make a DNN such that:
+Use this repo: https://github.com/davidtvs/pytorch-lr-finder (Links to an external site.) 
 
-it's first block uses following code:
-import datetime from datetime
-print("Current Date/Time: ", datetime.now())
-uses the Modules you have written
-calls following DNN from a file called QuizDNN.py:
-x1 = Input
-x2 = Conv(x1)
-x3 = Conv(x1 + x2)
-x4 = MaxPooling(x1 + x2 + x3)
-x5 = Conv(x4)
-x6 = Conv(x4 + x5)
-x7 = Conv(x4 + x5 + x6)
-x8 = MaxPooling(x5 + x6 + x7)
-x9 = Conv(x8)
-x10 = Conv (x8 + x9)
-x11 = Conv (x8 + x9 + x10)
-x12 = GAP(x11)
-x13 = FC(x12)
-Uses ReLU and BN wherever applicable
-Uses CIFAR10 as the dataset
-Your target is 75% in less than 40 Epochs
+
+Move LR Finder code to your modules
+
+
+Implement LR Finder (for SGD, not for ADAM)
+
+
+Implement ReduceLROnPlatea: https://pytorch.org/docs/stable/optim.html#torch.optim.lr_scheduler.ReduceLROnPlateau (Links to an external site.)
+
+
+Find best LR to train your model
+
+
+Use SDG with Momentum
+
+
+Train for 50 Epochs. 
+
+
+Show Training and Test Accuracy curves
+
+
+Target 88% Accuracy.
+
+
+Run GradCAM on the any 25 misclassified images. Make sure you mention what is the prediction and what was the ground truth label.
+Submit
+
 
