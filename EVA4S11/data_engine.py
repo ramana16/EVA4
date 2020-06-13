@@ -5,7 +5,7 @@ import torchvision.transforms as transforms
 import pprint
 
 from dataTransformations import albumentations_transforms
-from utilities import has_cuda
+from utilities import has_cuda, imshow
 
 class DataEngine(object):
 
@@ -52,3 +52,16 @@ class DataEngine(object):
 
 		self.train_loader = torch.utils.data.DataLoader(train_set, **dataloader_args)
 		self.test_loader = torch.utils.data.DataLoader(test_set, **dataloader_args)
+
+	def show_samples(self):
+		# get some random training images
+		dataiter = iter(self.train_loader)
+		images, labels = dataiter.next()
+		index = []
+		for i in range(len(self.classes)):
+			for j in range(len(labels)):
+				if labels[j] == i:
+					index.append(j)
+					break
+		imshow(torchvision.utils.make_grid(images[index],
+				nrow=len(self.classes), scale_each=True), str(self.classes))

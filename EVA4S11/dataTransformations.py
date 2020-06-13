@@ -7,10 +7,14 @@ from albumentations import (
 	Cutout,
 	RandomCrop,
 	VerticalFlip,
-	Resize
+	Resize,
+	PadIfNeeded,
+	OneOf,
+	CoarseDropout
 )
 from albumentations.pytorch import ToTensor
-import numpy as np	
+import numpy as np
+from cv2 import BORDER_CONSTANT, BORDER_REFLECT
 
 def albumentations_transforms(p=1.0, is_train=False):
 	# Mean and standard deviation of train dataset
@@ -20,9 +24,15 @@ def albumentations_transforms(p=1.0, is_train=False):
 	# Use data aug only for train data
 	if is_train:
 		transforms_list.extend([
-			HueSaturationValue(p=0.25),
+			PadIfNeeded(min_height=40, min_width=40, border_mode=BORDER_CONSTANT,
+					value=mean*255.0, p=1.0),
+			OneOf([
+				RandomCrop(height=32, width=32, p=0.8),
+				CenterCrop(height=32, width=32, p=0.2),
+			], p=1.0),
 			HorizontalFlip(p=0.5),
-			Rotate(limit=15),			
+			CoarseDropout(max_holes=1, max_height=8, max_width=8, min_height=8,
+						min_width=8, fill_value=mean*255.0, p=0.75),
 
 		])
 	transforms_list.extend([

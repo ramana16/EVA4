@@ -45,11 +45,11 @@ def train(model, device, train_loader, criterion, optimizer, epoch,
     processed += len(data)
     avg_loss += loss.item()
 
-    pbar_str = f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}'
+    pbar_str = f'Loss={loss.item():0.5f} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}'
     if l1_decay > 0:
-      pbar_str = f'L1_loss={l1_loss.item()} %s' % (pbar_str)
+      pbar_str = f'L1_loss={l1_loss.item():0.3f} %s' % (pbar_str)
     if l2_decay > 0:
-      pbar_str = f'L2_loss={l2_loss.item()} %s' % (pbar_str)
+      pbar_str = f'L2_loss={l2_loss.item():0.3f} %s' % (pbar_str)
 
     pbar.set_description(desc= pbar_str)
 

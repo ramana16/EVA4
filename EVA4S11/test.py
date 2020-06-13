@@ -34,7 +34,7 @@ def test(model, device, test_loader, criterion, classes, test_losses, test_accs,
                 })
             correct += is_correct.sum().item()
 
-    test_loss /= len(test_loader.dataset)
+    test_loss /= len(test_loader)
     test_losses.append(test_loss)
     
     test_acc = 100. * correct / len(test_loader.dataset)

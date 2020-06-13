@@ -20,10 +20,12 @@ def init_seed(args):
 def show_model_summary(model, input_size):
 	print(summary(model, input_size=input_size))
 
-def imshow(img):
+def imshow(img, title):
 	img = denormalize(img)
 	npimg = img.numpy()
+	fig = plt.figure(figsize=(15,7))
 	plt.imshow(np.transpose(npimg, (1, 2, 0)))
+	plt.title(title)
 
 
 def normalize(tensor, mean=[0.4914, 0.4822, 0.4465],
