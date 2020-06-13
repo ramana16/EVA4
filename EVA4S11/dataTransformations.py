@@ -26,12 +26,9 @@ def albumentations_transforms(p=1.0, is_train=False):
 			PadIfNeeded(min_height=40, min_width=40, border_mode=BORDER_CONSTANT,
 					value=mean*255.0, p=1.0),
 			OneOf([
-				RandomCrop(height=32, width=32, p=0.8),
-				CenterCrop(height=32, width=32, p=0.2),
+				RandomCrop(height=32, width=32, p=0.8),				
 			], p=1.0),
-			HorizontalFlip(p=0.5),
-			CoarseDropout(max_holes=1, max_height=8, max_width=8, min_height=8,
-						min_width=8, fill_value=mean*255.0, p=0.75),
+			HorizontalFlip(p=0.5),			
 
 		])
 	transforms_list.extend([
