@@ -9,8 +9,7 @@ from albumentations import (
 	VerticalFlip,
 	Resize,
 	PadIfNeeded,
-	OneOf,
-	CoarseDropout
+	OneOf	
 )
 from albumentations.pytorch import ToTensor
 import numpy as np
