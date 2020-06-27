@@ -43,7 +43,7 @@ class VisualizeCam(object):
 		plt.savefig(img_name)
 
 	def plot_heatmaps(self, img_data, img_name):
-		fig, axs = plt.subplots(nrows=len(img_data), ncols=3, figsize=(6, 50),
+		fig, axs = plt.subplots(nrows=len(img_data), ncols=5, figsize=(10, 50),
 			subplot_kw={'xticks': [], 'yticks': []})
 
 		for i in range(len(img_data)):
@@ -97,19 +97,15 @@ class VisualizeCam(object):
 				truth_class = self.classes[truth_inds[i]]
 				results_data = [{
 					"img": denormalize(img),
-					"label": "Actual: %s\nPredicted: %s" % (truth_class, pred_class)
+					"label": "A:%s P:%s" % (truth_class, pred_class)
 				}]
-				layer = "layer4"
-				mask = masks_map[layer][i]
-				heatmap, result = self.visualize_cam(mask, denormalize(img))
-				results_data.append({
-					"img": result,
-					"label": "GradCAM: %s" % (layer)
-				})
-				results_data.append({
-					"img": heatmap,
-					"label": "Heatmap: %s" % (layer)
-				})
+				for layer in masks_map.keys():
+					mask = masks_map[layer][i]
+					heatmap, result = self.visualize_cam(mask, denormalize(img))
+					results_data.append({
+						"img": result,
+						"label": "%s" % (layer)
+					})
 				img_data.append(results_data)
 			fname = "gradcam_%s.png" % (metric)
 			self.plot_heatmaps(img_data, fname)
