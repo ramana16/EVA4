@@ -304,6 +304,8 @@ Avg   :  0.8601,   0.9487,    0.9792,    0.0682
 <p><a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/viz_224.png"><img src="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/viz_224.png" style="max-width:100%;"></a></p>
 
 
+<p><a href="https://github.com/ramana16/EVA4/blob/master/EVA4S15/S15.ipynb" rel="nofollow"><img src="https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open In Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width:100%;"></a></p>
+
 
 
 
