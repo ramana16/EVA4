@@ -48,11 +48,19 @@ The inputs to the model are <b>bg</b> and <b>fg_bg</b>.
 
 <li>bg : [3 x 224 x 224]
 <li>fg_bg: [3 x 224 x 224]
-  <br>
-The outputs of the model are mask_pred and depth_pred.
+
+<br>
+The outputs of the model are <b>mask_pred</b> and <b>depth_pred</b>.
 
 <li>mask_pred: [1 x 224 x 224]
 <li>depth_pred: [1 x 224 x 224]
+<br/>
 Model definition file: https://github.com/ramana16/EVA4/tree/master/EVA4S15/models/depth_and_mask_dnn.py
 
 <b>Architecture</b>
+<br/>
+
+The model follows an encoder-decoder architecture. It consists of a common encoder and two decoders, for mask prediction and depth map prediction respectively.
+
+<li>The encoder uses ResNet blocks to extract the visual features.
+<li><ul>The decoder uses skip connections from the encoder and transpose convolutions to upscale the features and construct the mask and depth maps.
