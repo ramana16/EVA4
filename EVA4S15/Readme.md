@@ -63,4 +63,6 @@ Model definition file: https://github.com/ramana16/EVA4/tree/master/EVA4S15/mode
 The model follows an encoder-decoder architecture. It consists of a common encoder and two decoders, for mask prediction and depth map prediction respectively.
 
 <li>The encoder uses ResNet blocks to extract the visual features.
-<ul><li>The decoder uses skip connections from the encoder and transpose convolutions to upscale the features and construct the mask and depth maps.
+<li>The decoder uses skip connections from the encoder and transpose convolutions to upscale the features and construct the mask and depth maps.
+<br/>
+<img src="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/dnn_architecture.png">
