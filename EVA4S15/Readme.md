@@ -69,7 +69,8 @@ The model follows an encoder-decoder architecture. It consists of a common encod
   <br>
  <b> Parameters Count</b>
   <br>
-  <code>"
+  <code>
+    "
     --------------------------------------------------
     
 Total params: 3,165,170
@@ -77,12 +78,11 @@ Total params: 3,165,170
 Trainable params: 3,165,170
 
 Non-trainable params: 0
-
 --------------------------------------------------
-
-Input size (MB): 1.15<br>
-Forward/backward pass size (MB): 31581162963630.00<br>
-Params size (MB): 12.07<br>
+Input size (MB): 1.15
+Forward/backward pass size (MB): 31581162963630.00
+Params size (MB): 12.07
 Estimated Total Size (MB): 31581162963643.22<br>
---------------------------------------------------<br>"
+--------------------------------------------------
+"
   </code>
