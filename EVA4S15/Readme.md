@@ -21,17 +21,17 @@ Background:
 Foreground-Background: 
 
 <br/>
-<img src="https://raw.githubusercontent.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img src="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/bg_strip.png"></img>
 <br/>
 Foreground-Background Mask: 
 
 <br/>
-<img src="https://raw.githubusercontent.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img src="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/bg_strip.png"></img>
 <br/>
 Foreground-Background Depth: 
 
 <br/>
-<img src="https://raw.githubusercontent.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img src="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/bg_strip.png"></img>
 <br/>
 
 <b>Notations</b>
