@@ -16,22 +16,22 @@ A custom dataset will be used to train this model, which consists of:
 
 Background: 
 <br/>
-<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png?raw=true"></img>
 <br/>
 Foreground-Background: 
 
 <br/>
-<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png?raw=true"></img>
 <br/>
 Foreground-Background Mask: 
 
 <br/>
-<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png?raw=true"></img>
 <br/>
 Foreground-Background Depth: 
 
 <br/>
-<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png"></img>
+<img url="https://github.com/ramana16/EVA4/tree/master/EVA4S15/images/bg_strip.png?raw=true"></img>
 <br/>
 
 <b>Notations</b>
