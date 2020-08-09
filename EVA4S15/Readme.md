@@ -66,3 +66,18 @@ The model follows an encoder-decoder architecture. It consists of a common encod
 <li>The decoder uses skip connections from the encoder and transpose convolutions to upscale the features and construct the mask and depth maps.
 <br/>
 <img src="https://raw.githubusercontent.com/ramana16/EVA4/master/EVA4S15/images/dnn_architecture.png">
+  <br>
+ <b> Parameters Count</b>
+  <br>
+  <code>
+    --------------------------------------------------<br>
+Total params: 3,165,170<br>
+Trainable params: 3,165,170<br>
+Non-trainable params: 0<br>
+--------------------------------------------------<br>
+Input size (MB): 1.15<br>
+Forward/backward pass size (MB): 31581162963630.00<br>
+Params size (MB): 12.07<br>
+Estimated Total Size (MB): 31581162963643.22<br>
+--------------------------------------------------<br>
+  </code>
